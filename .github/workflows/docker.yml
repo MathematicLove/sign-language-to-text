@@ -47,9 +47,3 @@ jobs:
         run: |
           docker run --rm ${{ env.IMAGE }}:latest python -m pytest
           docker run --rm ${{ env.IMAGE }}:latest python -m app.main --help
-
-      - name: Delete every tag except latest
-        env:
-          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-        run: python3 .github/scripts/prune_tags.py

@@ -14,8 +14,7 @@ Available text:
 ## Examples
 
 <p>
-  <img src="https://mathematiclove.github.io/my-cv/content/projects/SIGN_TO_TEXT/EXAMPLE_1.png" alt="Fig. 1: Example 1" width="45%">
-  <img src="https://mathematiclove.github.io/my-cv/content/projects/SIGN_TO_TEXT/EXAMPLE_3.png" alt="Fig. 2: Example 2" width="45%">
+  <img src="https://mathematiclove.github.io/my-cv/content/projects/SIGN_TO_TEXT/EXAMPLE_3.png" alt="Fig. 1: Example 1" width="45%">
 </p>
 
 ## Install
