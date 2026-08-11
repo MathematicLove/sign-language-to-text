@@ -1,0 +1,17 @@
+services:
+  app:
+    build: .
+    image: sign-language-to-text
+    environment:
+      - DISPLAY=${DISPLAY}
+      - QT_X11_NO_MITSHM=1
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:ro
+    devices:
+      - /dev/video0:/dev/video0
+    command: ["python", "-m", "app.main"]
+
+  tests:
+    build: .
+    image: sign-language-to-text
+    command: ["python", "-m", "pytest"]

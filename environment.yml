@@ -1,0 +1,12 @@
+name: slt
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pip
+  - numpy>=1.26
+  - pillow>=10.0
+  - pytest>=7.4
+  - pip:
+      - opencv-python>=4.8
+      - mediapipe>=0.10.18

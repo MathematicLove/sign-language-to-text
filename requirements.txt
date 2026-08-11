@@ -1,0 +1,4 @@
+opencv-python>=4.8
+mediapipe>=0.10.18
+numpy>=1.26
+Pillow>=10.0
