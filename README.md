@@ -7,8 +7,16 @@ also a practice mode that shows a letter and checks that you repeat it.
 Built with OpenCV, MediaPipe Hand Landmarker and NumPy.
 
 Available text:
+
 - ASL (Americal Sign Language) / Sign to text, text to sing
 - РЖЯ (Русский Язык Жестов) / Жесты в текст, текст в жесты
+
+## Examples
+
+<p>
+  <img src="https://mathematiclove.github.io/my-cv/content/projects/SIGN_TO_TEXT/EXAMPLE_1.png" alt="Fig. 1: Example 1" width="45%">
+  <img src="https://mathematiclove.github.io/my-cv/content/projects/SIGN_TO_TEXT/EXAMPLE_3.png" alt="Fig. 2: Example 2" width="45%">
+</p>
 
 ## Install
 
@@ -39,7 +47,11 @@ word.
 
 ## Docker
 
-Tests run anywhere:
+A prebuilt image is published on Docker Hub on every commit, see DOCKERHUB.md:
+
+    docker pull USERNAME/sign-language-to-text
+
+To build and run locally, tests run anywhere:
 
     docker compose run --rm tests
 
