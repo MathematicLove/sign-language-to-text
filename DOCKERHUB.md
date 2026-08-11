@@ -1,4 +1,4 @@
-# sign-language-to-text
+# ASL, RSL to text (text to ASL, RSL)
 
 Fingerspelling translator for ASL and RSL. The camera recognizes hand shapes and
 builds text; the reverse mode plays typed text back as an animated hand. There is
@@ -17,24 +17,20 @@ Available alphabets:
 
 ## Tags
 
-- latest: built from the default branch
-- sha-COMMIT: one tag per commit, using the full commit sha
-- BRANCH: latest build of that branch
-- vX.Y.Z: release tags
+Only one tag is published: latest. Every push rebuilds it and older tags are
+deleted, so latest is always the current build.
 
-Each tag is a multi-arch manifest for linux/amd64 and linux/arm64.
+It is a multi-arch manifest for linux/amd64 and linux/arm64.
 
 ## Pull
 
-    docker pull USERNAME/sign-language-to-text
-
-Replace USERNAME with the Docker Hub account this image is published under.
+    docker pull flugmaschine/sign-language-to-text
 
 ## Run the tests
 
 This needs neither a camera nor a display, so it works on any host:
 
-    docker run --rm USERNAME/sign-language-to-text python -m pytest
+    docker run --rm flugmaschine/sign-language-to-text python -m pytest
 
 ## Run the app
 
@@ -47,20 +43,20 @@ forwarded from the host. Docker can do that on Linux with X11:
       -e QT_X11_NO_MITSHM=1 \
       -v /tmp/.X11-unix:/tmp/.X11-unix:ro \
       --device /dev/video0:/dev/video0 \
-      USERNAME/sign-language-to-text
+      flugmaschine/sign-language-to-text
 
 On macOS and Windows, Docker does not pass a webcam through to the container, so
 use the image for tests only and run the app natively on the host.
 
 Options:
 
-    docker run --rm ... USERNAME/sign-language-to-text \
+    docker run --rm ... flugmaschine/sign-language-to-text \
       python -m app.main --mode recognize --lang asl
 
-    docker run --rm ... USERNAME/sign-language-to-text \
+    docker run --rm ... flugmaschine/sign-language-to-text \
       python -m app.main --mode spell --lang rsl --text privet
 
-    docker run --rm ... USERNAME/sign-language-to-text \
+    docker run --rm ... flugmaschine/sign-language-to-text \
       python -m app.main --mode practice --lang rsl
 
 Russian letters are typed in latin and transliterated, so "privet" becomes the
@@ -91,3 +87,5 @@ Default command is: python -m app.main
 ## Source
 
 https://github.com/MathematicLove/sign-language-to-text
+
+**by Salimli Ayzek (Салимли Айзек): https://mathematiclove.github.io**

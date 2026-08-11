@@ -19,6 +19,7 @@ Point = Tuple[float, float, float]
 
 CURL_EXTENDED = 0.35
 CURL_FOLDED = 0.68
+OPEN_PALM_SPREAD = 1.45
 
 def sub(a: Point, b: Point) -> Point:
     return (a[0] - b[0], a[1] - b[1], a[2] - b[2])
@@ -84,6 +85,13 @@ class HandFeatures:
 
     def n_extended(self) -> int:
         return sum(1 for f in LONG_FINGERS if self.extended[f])
+
+    def is_open_palm(self) -> bool:
+        if not all(self.extended[f] for f in LONG_FINGERS):
+            return False
+        if self.folded.get("thumb", False):
+            return False
+        return self.tip_dist.get("index_pinky", 0.0) >= OPEN_PALM_SPREAD
 
 def hand_scale(pts: Sequence[Point]) -> float:
     palm_width = norm(sub(pts[17], pts[5]))

@@ -1,4 +1,4 @@
-# sign-language-to-text
+# ASL, RSL to text (text to ASL, RSL)
 
 Fingerspelling translator for ASL and RSL. The camera recognizes hand shapes and
 builds text; the reverse mode plays typed text back as an animated hand. There is
@@ -49,7 +49,7 @@ word.
 
 A prebuilt image is published on Docker Hub on every commit, see DOCKERHUB.md:
 
-    docker pull USERNAME/sign-language-to-text
+    docker pull flugmaschine/sign-language-to-text
 
 To build and run locally, tests run anywhere:
 
@@ -60,3 +60,5 @@ X11:
 
     xhost +local:docker
     docker compose up app
+
+**by Salimli Ayzek (Салимли Айзек): https://mathematiclove.github.io**
