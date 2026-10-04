@@ -56,6 +56,11 @@ class RecognizeScreen(Screen):
     def leave(self) -> None:
         self.camera.release()
         self.classifier.reset()
+        # Screens are rebuilt on every visit, so the detector must be freed here
+        # or each visit leaks a MediaPipe graph.
+        if self._tracker is not None:
+            self._tracker.close()
+            self._tracker = None
 
     def update(self, dt: float) -> Optional[Go]:
         if self._error or self._tracker is None:
