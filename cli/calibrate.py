@@ -77,41 +77,41 @@ def main(argv: Optional[list] = None) -> int:
     except TrackerUnavailable as exc:
         print(exc)
         return 1
-    cv2.namedWindow(WINDOW, cv2.WINDOW_AUTOSIZE)
-    suggestion = ""
-    with Camera(args.camera) as cam:
+    with tracker, Camera(args.camera) as cam:
         if not cam.opened:
             print(cam.error)
             return 1
-        while True:
-            frame = cam.read()
-            if frame is None:
-                break
-            hands = tracker.process(frame)
-            lines = ["no hand visible"]
-            if hands:
-                obs = hands[0]
-                r.draw_hand(frame, obs.pixels)
-                lines = report(obs.features, spec)
-                suggestion = suggest(obs.features, letter)
+        cv2.namedWindow(WINDOW, cv2.WINDOW_AUTOSIZE)
+        suggestion = ""
+        try:
+            while True:
+                frame = cam.read()
+                if frame is None:
+                    break
+                hands = tracker.process(frame)
+                lines = ["no hand visible"]
+                if hands:
+                    obs = hands[0]
+                    r.draw_hand(frame, obs.pixels)
+                    lines = report(obs.features, spec)
+                    suggestion = suggest(obs.features, letter)
 
-            r.panel(frame, 10, 10, 330, 26 * len(lines) + 60)
-            with r.TextLayer(frame) as text:
-                text.text(f"{lang.name} - {letter} - {spec.hint[:34]}", (24, 22), 17, r.ACCENT2)
-                for i, line in enumerate(lines):
-                    text.text(line, (24, 52 + i * 24), 17, r.FG)
-                r.hotkeys(frame, [("S", "print LetterSpec"), ("Esc", "quit")],
-                          layer=text)
+                r.panel(frame, 10, 10, 330, 26 * len(lines) + 60)
+                with r.TextLayer(frame) as text:
+                    text.text(f"{lang.name} - {letter} - {spec.hint[:34]}", (24, 22), 17, r.ACCENT2)
+                    for i, line in enumerate(lines):
+                        text.text(line, (24, 52 + i * 24), 17, r.FG)
+                    r.hotkeys(frame, [("S", "print LetterSpec"), ("Esc", "quit")],
+                              layer=text)
 
-            cv2.imshow(WINDOW, frame)
-            key = keys.read(cv2.waitKeyEx(1))
-            if key.is_("esc") or key.lower() == "q":
-                break
-            if key.lower() == "s" and suggestion:
-                print(suggestion)
-
-    tracker.close()
-    cv2.destroyAllWindows()
+                cv2.imshow(WINDOW, frame)
+                key = keys.read(cv2.waitKeyEx(1))
+                if key.is_("esc") or key.lower() == "q":
+                    break
+                if key.lower() == "s" and suggestion:
+                    print(suggestion)
+        finally:
+            cv2.destroyAllWindows()
     return 0
 
 if __name__ == "__main__":

@@ -75,6 +75,11 @@ class PracticeScreen(Screen):
     def leave(self) -> None:
         self.camera.release()
         self.classifier.reset()
+        # Screens are rebuilt on every visit, so the detector must be freed here
+        # or each visit leaks a MediaPipe graph.
+        if self._tracker is not None:
+            self._tracker.close()
+            self._tracker = None
 
     def next_letter(self, skipped: bool = False) -> None:
         if skipped and self._target:
